@@ -7,7 +7,7 @@ using System.Text.Json;
 using System.Text.Unicode;
 using ModelEngine;
 
-namespace EnginesTesting.WorkingData
+namespace WorkingData
 {
     public class WorkingData
     {
