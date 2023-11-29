@@ -6,7 +6,8 @@ namespace EnginesTesting
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            double x;
+            Console.WriteLine(x);
         }
     }
 }
