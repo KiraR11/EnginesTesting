@@ -11,6 +11,7 @@ namespace EnginesTesting
         public EngineTest(Engine engine,List<DependTorqueOnSpeedCrankshaft> dependence)
         {
             Engine = engine;
+            Engine.CoolDown();
             LinearDependence = dependence;
             Run();
         }

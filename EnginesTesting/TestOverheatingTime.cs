@@ -32,8 +32,8 @@ namespace EnginesTesting
             {
                 if (Engine.Temp <= Engine.SuperheatTemp)
                 {
-                    Engine.Torque = LinearDependence[i].Torque;
-                    Engine.SpeedCrankshaft = LinearDependence[i].SpeedCrankshaft;
+                    Engine.TorqueAndSpeedCrankshaft.Torque = LinearDependence[i].Torque;
+                    Engine.TorqueAndSpeedCrankshaft.SpeedCrankshaft = LinearDependence[i].SpeedCrankshaft;
                     time++;
                 }
                 else break;

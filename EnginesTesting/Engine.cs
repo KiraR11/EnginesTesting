@@ -26,52 +26,27 @@ namespace EnginesTesting
         public double CoefCoolingSpeedOnTempEngineAndEnvironment { get; }
         public double InertiaMoment { get; }
 
-        private double? _torque = 0.0;
-        public double Torque
+        private DependTorqueOnSpeedCrankshaft _torqueAndSpeedCrankshaft = new DependTorqueOnSpeedCrankshaft(0.0, 0.0);
+        public DependTorqueOnSpeedCrankshaft TorqueAndSpeedCrankshaft 
         {
             get
             {
-                if (_torque != null && _torque >= 0.0) return (double)_torque;
-                else throw new Exception();
+                return _torqueAndSpeedCrankshaft;
             }
             set
             {
-                if (value >= 0.0)
-                {
-                    _torque = value;
-                    Temp = CalcTemp();
-                    
-                }
-                    
-                else throw new Exception();
+                _torqueAndSpeedCrankshaft = value;
+                Temp = CalcTemp();
             }
         }
-        private double? _speedCrankshaft = 0.0;
-        public double SpeedCrankshaft
-        {
-            get
-            {
-                if (_speedCrankshaft != null && _speedCrankshaft >= 0.0) return (double)_speedCrankshaft;
-                else throw new Exception();
-            }
-            set
-            {
-                if (value >= 0.0)
-                {
-                    _speedCrankshaft = value;
-                    Temp = CalcTemp();
-                }
-                    
-                else throw new Exception();
-            }
-        }
-        public double HeatingSpeed { get { return CalcHeatingSpeed(); } }
-        public double CoolingSpeed { get {return CalcCoolingSpeed(); } }
+        private double HeatingSpeed { get{ return CalcHeatingSpeed(); } }
+        private double CoolingSpeed { get { return CalcCoolingSpeed(); } }
+         
         public double Power { get {return CalcPower(); } }
 
         private double CalcHeatingSpeed()
         {
-            double result = (double)(Torque * CoefHeatingSpeedOnTorque + SpeedCrankshaft * SpeedCrankshaft * CoefHeatingSpeedOnCrankshaft);//?
+            double result = TorqueAndSpeedCrankshaft.Torque * CoefHeatingSpeedOnTorque + TorqueAndSpeedCrankshaft.SpeedCrankshaft * TorqueAndSpeedCrankshaft.SpeedCrankshaft * CoefHeatingSpeedOnCrankshaft;
             return result;
         }
 
@@ -82,13 +57,17 @@ namespace EnginesTesting
         }
         private double CalcPower()
         {
-            double result = (double)(Torque * SpeedCrankshaft / 1000);
+            double result = TorqueAndSpeedCrankshaft.Torque * TorqueAndSpeedCrankshaft.SpeedCrankshaft / 1000;
             return result;
         }
         private double CalcTemp()
         {
             double result = Temp + HeatingSpeed + CoolingSpeed;
             return result;
+        }
+        public void CoolDown()//передоватьTempEnvironment?
+        {
+            Temp = TempEnvironment;    
         }
 
     }

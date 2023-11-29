@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EnginesTesting
 {
-    internal class DependTorqueOnSpeedCrankshaft
+    public class DependTorqueOnSpeedCrankshaft
     {
         public DependTorqueOnSpeedCrankshaft(double torque, double speedCrankshaft)
         {
