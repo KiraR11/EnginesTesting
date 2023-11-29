@@ -35,7 +35,7 @@ namespace EnginesTesting
             
             */
 
-            InternalCombustionEngine engine = new InternalCombustionEngine(25, 110.0, 10.0, 0.01, 0.0001, 0.1);
+            Engine engine = new InternalCombustionEngine(25, 110.0, 10.0, 0.01, 0.0001, 0.1);
             List<DependTorqueOnSpeedCrankshaft> dependence = new List<DependTorqueOnSpeedCrankshaft>() {
                 new (20.0,0.0), 
                 new (75.0,75.0), 

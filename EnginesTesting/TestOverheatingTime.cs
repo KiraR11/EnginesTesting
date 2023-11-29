@@ -8,9 +8,13 @@ namespace EnginesTesting
 {
     internal class TestOverheatingTime : EngineTest
     {
-        public TestOverheatingTime(Engine engine, List<DependTorqueOnSpeedCrankshaft> dependence) : base(engine, dependence)
-        {}
+        public TestOverheatingTime(Engine engine, List<DependTorqueOnSpeedCrankshaft> dependence) : base(engine)
+        {
+            LinearDependence = dependence;
+        }
         private double? _overheatingTime;
+
+        private List<DependTorqueOnSpeedCrankshaft> LinearDependence { get; }
         public double? OverheatingTime
         {
             get

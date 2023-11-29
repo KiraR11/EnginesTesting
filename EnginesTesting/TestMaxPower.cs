@@ -6,12 +6,15 @@ using System.Threading.Tasks;
 
 namespace EnginesTesting
 {
-    internal class TestMaxPower : EngineTest
+    public class TestMaxPower : EngineTest
     {
-        public TestMaxPower(Engine engine, List<DependTorqueOnSpeedCrankshaft> dependence) : base(engine, dependence)
-        {}
+        public TestMaxPower(Engine engine, List<DependTorqueOnSpeedCrankshaft> dependence) : base(engine)
+        {
+            LinearDependence= dependence;
+        }
         private double? _maxPower;
         private double? _speedCrankshaft;
+        private List<DependTorqueOnSpeedCrankshaft> LinearDependence { get; }
 
         public double? MaxPower
         {
@@ -43,21 +46,21 @@ namespace EnginesTesting
         }
         protected override void Run()
         {
-            double maxPower = Engine.Power;
+            double maxPower = 0.0;
 
-            double speedCrankshaft = (double)Engine.SpeedCrankshaft;
+            double speedCrankshaft = 0.0;
             for (int i = 0; i < LinearDependence.Count; i++)
             {
-                Engine.Torque = LinearDependence[i].Torque;
-                Engine.SpeedCrankshaft = LinearDependence[i].SpeedCrankshaft;
+                Engine.TorqueAndSpeedCrankshaft.Torque = LinearDependence[i].Torque;
+                Engine.TorqueAndSpeedCrankshaft.SpeedCrankshaft = LinearDependence[i].SpeedCrankshaft;
                 if (Engine.Power > maxPower)
                 {
                     maxPower = Engine.Power;
-                    speedCrankshaft = (double)Engine.SpeedCrankshaft;
+                    speedCrankshaft = Engine.TorqueAndSpeedCrankshaft.SpeedCrankshaft;
                 }
             }
-            MaxPower= maxPower;
-            SpeedCrankshaft= speedCrankshaft;
+            MaxPower = maxPower;
+            SpeedCrankshaft = speedCrankshaft;
         }
     }
 }

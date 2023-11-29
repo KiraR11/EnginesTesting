@@ -6,17 +6,15 @@ using System.Threading.Tasks;
 
 namespace EnginesTesting
 {
-    internal abstract class EngineTest
+    public abstract class EngineTest
     {
-        public EngineTest(Engine engine,List<DependTorqueOnSpeedCrankshaft> dependence)
+        public EngineTest(Engine engine)
         {
             Engine = engine;
             Engine.CoolDown();
-            LinearDependence = dependence;
             Run();
         }
         protected Engine Engine { get;}
-        protected List<DependTorqueOnSpeedCrankshaft> LinearDependence { get; }
         protected abstract void Run();
     }
 }
