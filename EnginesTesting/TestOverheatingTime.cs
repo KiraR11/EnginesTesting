@@ -9,11 +9,23 @@ namespace EnginesTesting
     internal class TestOverheatingTime : EngineTest
     {
         public TestOverheatingTime(Engine engine, List<DependTorqueOnSpeedCrankshaft> dependence) : base(engine, dependence)
+        {}
+        private double? _overheatingTime;
+        public double? OverheatingTime
         {
-            Run();
+            get
+            {
+                if (_overheatingTime != null && _overheatingTime >= 0.0) return _overheatingTime;
+                else throw new Exception();
+            }
+            private set
+            {
+                if (value != null && value >= 0.0)
+                    _overheatingTime = value;
+                else throw new Exception();
+            }
         }
-        public double OverheatingTime { get; private set; }//сделать больше нуля на set
-        public override void Run()
+        protected override void Run()
         {
             double time = 0.0; 
             for (int i = 0; i < LinearDependence.Count; i++)
@@ -26,7 +38,7 @@ namespace EnginesTesting
                 }
                 else break;
             }
-            OverheatingTime = time;
+            _overheatingTime = time;
         }
     }
 }

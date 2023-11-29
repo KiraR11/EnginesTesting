@@ -19,31 +19,59 @@ namespace EnginesTesting
             InertiaMoment = inertiaMoment;
         }
         public double TempEnvironment { get; } //?
-        public double Temp { get { return CalcTemp(); } private set { } }
+        public double Temp { get; private set; }
         public double SuperheatTemp { get; }
         public double CoefHeatingSpeedOnTorque { get; }
         public double CoefHeatingSpeedOnCrankshaft { get; }
         public double CoefCoolingSpeedOnTempEngineAndEnvironment { get; }
         public double InertiaMoment { get; }
-        public double Torque {
-            get 
+
+        private double? _torque = 0.0;
+        public double Torque
+        {
+            get
             {
-                if (Torque != 5) return Torque;
+                if (_torque != null && _torque >= 0.0) return (double)_torque;
                 else throw new Exception();
-            } 
-            set 
+            }
+            set
             {
-                if(value >= 0 )
-                    Torque = value;
-            } }
-        public double SpeedCrankshaft { get; } = 0.0;//добавить set
+                if (value >= 0.0)
+                {
+                    _torque = value;
+                    Temp = CalcTemp();
+                    
+                }
+                    
+                else throw new Exception();
+            }
+        }
+        private double? _speedCrankshaft = 0.0;
+        public double SpeedCrankshaft
+        {
+            get
+            {
+                if (_speedCrankshaft != null && _speedCrankshaft >= 0.0) return (double)_speedCrankshaft;
+                else throw new Exception();
+            }
+            set
+            {
+                if (value >= 0.0)
+                {
+                    _speedCrankshaft = value;
+                    Temp = CalcTemp();
+                }
+                    
+                else throw new Exception();
+            }
+        }
         public double HeatingSpeed { get { return CalcHeatingSpeed(); } }
         public double CoolingSpeed { get {return CalcCoolingSpeed(); } }
         public double Power { get {return CalcPower(); } }
 
         private double CalcHeatingSpeed()
         {
-            double result = Torque * CoefHeatingSpeedOnTorque + SpeedCrankshaft * SpeedCrankshaft * CoefHeatingSpeedOnCrankshaft;
+            double result = (double)(Torque * CoefHeatingSpeedOnTorque + SpeedCrankshaft * SpeedCrankshaft * CoefHeatingSpeedOnCrankshaft);//?
             return result;
         }
 
@@ -54,7 +82,7 @@ namespace EnginesTesting
         }
         private double CalcPower()
         {
-            double result = Torque * SpeedCrankshaft / 1000;
+            double result = (double)(Torque * SpeedCrankshaft / 1000);
             return result;
         }
         private double CalcTemp()

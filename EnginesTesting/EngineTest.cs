@@ -12,9 +12,10 @@ namespace EnginesTesting
         {
             Engine = engine;
             LinearDependence = dependence;
+            Run();
         }
-        public Engine Engine { get;}
-        public List<DependTorqueOnSpeedCrankshaft> LinearDependence { get; }
-        abstract public void Run();
+        protected Engine Engine { get;}
+        protected List<DependTorqueOnSpeedCrankshaft> LinearDependence { get; }
+        protected abstract void Run();
     }
 }
