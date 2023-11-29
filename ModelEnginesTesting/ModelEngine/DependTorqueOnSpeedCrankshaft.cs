@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ModelEnginesTesting.ModelEngine
+namespace ModelEngine
 {
     public class DependTorqueOnSpeedCrankshaft
     {

@@ -6,6 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\EnginesTesting.View\EnginesTesting.View.csproj" />
+    <ProjectReference Include="..\EnginesTesting.WorkingData\EnginesTesting.Data.csproj" />
     <ProjectReference Include="..\ModelEnginesTesting\EnginesTesting.Model.csproj" />
   </ItemGroup>
 

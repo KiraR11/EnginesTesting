@@ -1,6 +1,4 @@
-﻿using ModelEnginesTesting.ModelEngine;
-
-namespace EnginesTesting
+﻿namespace ModelEngine
 {
     public abstract class Engine
     {
