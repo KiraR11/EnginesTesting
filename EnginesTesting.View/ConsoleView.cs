@@ -87,11 +87,11 @@ namespace View
                 }
                 else
                 {
-                    MessageIncorrectInput(); // throw new ArgumentException("Выбранного елемента нет в списке");
+                    MessageIncorrectInput();
                 }
             } while (true);
         }
-        private static bool IsNumberInList(int count, string? indexStr, out int index)
+        private static bool IsNumberInList(int count, string indexStr, out int index)
         {
             bool tryParseChecked = int.TryParse(indexStr, out index);
             return tryParseChecked && count >= index && index > 0;
