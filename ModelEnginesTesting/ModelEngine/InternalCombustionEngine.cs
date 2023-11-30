@@ -8,8 +8,8 @@ namespace ModelEngine
 {
     public class InternalCombustionEngine : Engine
     {
-        public InternalCombustionEngine(double temp, double superheatTemp, double inertiaMoment, double coefHeatingSpeedOnTorque, double coefHeatingSpeedOnCrankshaft, double coefCoolingSpeedOnTempEngineAndEnvironment)
-           : base(temp, superheatTemp, inertiaMoment, coefHeatingSpeedOnTorque, coefHeatingSpeedOnCrankshaft, coefCoolingSpeedOnTempEngineAndEnvironment) {}
+        public InternalCombustionEngine(double superheatTemp, double inertiaMoment, double coefHeatingSpeedOnTorque, double coefHeatingSpeedOnCrankshaft, double coefCoolingSpeedOnTempEngineAndEnvironment)
+           : base(superheatTemp, inertiaMoment, coefHeatingSpeedOnTorque, coefHeatingSpeedOnCrankshaft, coefCoolingSpeedOnTempEngineAndEnvironment) {}
         
     }
 }

@@ -8,23 +8,20 @@ namespace ModelEngine
 {
     public class TestOverheatingTime : EngineTest
     {
-        public TestOverheatingTime(Engine engine, List<DependTorqueOnSpeedCrankshaft> dependence) : base(engine)
-        {
-            LinearDependence = dependence;
-        }
-        private double? _overheatingTime;
+        public TestOverheatingTime(Engine engine,Experiment experiment) : base(engine, experiment) { }
 
+        private double? _overheatingTime;
         private List<DependTorqueOnSpeedCrankshaft> LinearDependence { get; }
-        public double? OverheatingTime
+        public double OverheatingTime
         {
             get
             {
-                if (_overheatingTime != null && _overheatingTime >= 0.0) return _overheatingTime;
+                if (_overheatingTime != null && _overheatingTime >= 0.0) return (double)_overheatingTime;
                 else throw new Exception();
             }
             private set
             {
-                if (value != null && value >= 0.0)
+                if (value >= 0.0)
                     _overheatingTime = value;
                 else throw new Exception();
             }
@@ -32,12 +29,12 @@ namespace ModelEngine
         protected override void Run()
         {
             double time = 0.0; 
-            for (int i = 0; i < LinearDependence.Count; i++)
+            for (int i = 0; i < Experiment.LinearDependence.Count; i++)
             {
                 if (Engine.Temp <= Engine.SuperheatTemp)
                 {
-                    Engine.TorqueAndSpeedCrankshaft.Torque = LinearDependence[i].Torque;
-                    Engine.TorqueAndSpeedCrankshaft.SpeedCrankshaft = LinearDependence[i].SpeedCrankshaft;
+                    Engine.TorqueAndSpeedCrankshaft.Torque = Experiment.LinearDependence[i].Torque;
+                    Engine.TorqueAndSpeedCrankshaft.SpeedCrankshaft = Experiment.LinearDependence[i].SpeedCrankshaft;
                     time++;
                 }
                 else break;

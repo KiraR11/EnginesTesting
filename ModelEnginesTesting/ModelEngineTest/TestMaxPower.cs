@@ -1,45 +1,37 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace ModelEngine
 {
     public class TestMaxPower : EngineTest
     {
-        public TestMaxPower(Engine engine, List<DependTorqueOnSpeedCrankshaft> dependence) : base(engine)
-        {
-            LinearDependence= dependence;
-        }
+        public TestMaxPower(Engine engine, Experiment experiment) : base(engine, experiment) { }
+
         private double? _maxPower;
         private double? _speedCrankshaft;
-        private List<DependTorqueOnSpeedCrankshaft> LinearDependence { get; }
 
-        public double? MaxPower
+        public double MaxPower
         {
             get
             {
-                if (_maxPower != null && _maxPower >= 0.0) return _maxPower;
+                if (_maxPower != null && _maxPower >= 0.0) return (double)_maxPower;
                 else throw new Exception();
             }
             private set
             {
-                if (value != null && value >= 0.0)
+                if (value >= 0.0)
                     _maxPower = value;
                 else throw new Exception();
             }
         }
-        public double? SpeedCrankshaft
+        public double SpeedCrankshaft
         {
             get
             {
-                if (_speedCrankshaft != null && _speedCrankshaft >= 0.0) return _speedCrankshaft;
+                if (_speedCrankshaft != null && _speedCrankshaft >= 0.0) return (double)_speedCrankshaft;
                 else throw new Exception();
             }
             private set
             {
-                if (value != null && value >= 0.0)
+                if (value >= 0.0)
                     _speedCrankshaft = value;
                 else throw new Exception();
             }
@@ -49,10 +41,10 @@ namespace ModelEngine
             double maxPower = 0.0;
 
             double speedCrankshaft = 0.0;
-            for (int i = 0; i < LinearDependence.Count; i++)
+            for (int i = 0; i < Experiment.LinearDependence.Count; i++)
             {
-                Engine.TorqueAndSpeedCrankshaft.Torque = LinearDependence[i].Torque;
-                Engine.TorqueAndSpeedCrankshaft.SpeedCrankshaft = LinearDependence[i].SpeedCrankshaft;
+                Engine.TorqueAndSpeedCrankshaft.Torque = Experiment.LinearDependence[i].Torque;
+                Engine.TorqueAndSpeedCrankshaft.SpeedCrankshaft = Experiment.LinearDependence[i].SpeedCrankshaft;
                 if (Engine.Power > maxPower)
                 {
                     maxPower = Engine.Power;

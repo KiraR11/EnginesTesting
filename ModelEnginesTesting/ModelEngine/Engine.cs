@@ -1,19 +1,35 @@
-﻿namespace ModelEngine
+﻿using System;
+
+namespace ModelEngine
 {
     public abstract class Engine
     {
-        protected Engine(double tempEnvironment, double superheatTemp, double inertiaMoment, double coefHeatingSpeedOnTorque, double coefHeatingSpeedOnCrankshaft, double coefCoolingSpeedOnTempEngineAndEnvironment)
+        protected Engine(double superheatTemp, double inertiaMoment, double coefHeatingSpeedOnTorque, double coefHeatingSpeedOnCrankshaft, double coefCoolingSpeedOnTempEngineAndEnvironment)
         {
-            Temp = tempEnvironment;
-            TempEnvironment = tempEnvironment;
             SuperheatTemp = superheatTemp;
             CoefHeatingSpeedOnTorque = coefHeatingSpeedOnTorque;
             CoefHeatingSpeedOnCrankshaft = coefHeatingSpeedOnCrankshaft;
             CoefCoolingSpeedOnTempEngineAndEnvironment = coefCoolingSpeedOnTempEngineAndEnvironment;
             InertiaMoment = inertiaMoment;
         }
-        public double TempEnvironment { get; } //?
-        public double Temp { get; private set; }
+        private double TempEnvironment { get; set; }
+        private double? _temp = null;
+        public double Temp
+        {
+            get
+            {
+                if (_temp != null) return (double)_temp;
+                else throw new Exception();
+            }
+            set
+            {
+                if (TempCorrect(value))
+                {
+                    _temp = value;
+                }
+                else throw new Exception();
+            }
+        }
         public double SuperheatTemp { get; }
         public double CoefHeatingSpeedOnTorque { get; }
         public double CoefHeatingSpeedOnCrankshaft { get; }
@@ -59,9 +75,18 @@
             double result = Temp + HeatingSpeed + CoolingSpeed;
             return result;
         }
-        public void CoolDown()//передоватьTempEnvironment?
+        public void CoolDown(double tempEnvironment)
         {
-            Temp = TempEnvironment;    
+            if(TempCorrect(tempEnvironment))
+            {
+                Temp = tempEnvironment;
+                TempEnvironment = tempEnvironment;
+            }
+            
+        }
+        private bool TempCorrect(double temp)
+        {
+            return  (temp >= -273.0) ? true : false;
         }
 
     }
