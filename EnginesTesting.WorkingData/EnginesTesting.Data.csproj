@@ -8,4 +8,16 @@
     <ProjectReference Include="..\ModelEnginesTesting\EnginesTesting.Model.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="JsonData\dependsExp.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="JsonData\engines.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="JsonData\resultTesting.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

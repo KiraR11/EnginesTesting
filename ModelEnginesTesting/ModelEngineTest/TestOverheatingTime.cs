@@ -10,8 +10,9 @@ namespace ModelEngine
     {
         public TestOverheatingTime(Engine engine,Experiment experiment) : base(engine, experiment) { }
 
+        public bool Overheating { get; private set; } = false;
+
         private double? _overheatingTime;
-        private List<DependTorqueOnSpeedCrankshaft> LinearDependence { get; }
         public double OverheatingTime
         {
             get
@@ -31,13 +32,18 @@ namespace ModelEngine
             double time = 0.0; 
             for (int i = 0; i < Experiment.LinearDependence.Count; i++)
             {
+                time++;
                 if (Engine.Temp <= Engine.SuperheatTemp)
                 {
                     Engine.TorqueAndSpeedCrankshaft.Torque = Experiment.LinearDependence[i].Torque;
                     Engine.TorqueAndSpeedCrankshaft.SpeedCrankshaft = Experiment.LinearDependence[i].SpeedCrankshaft;
-                    time++;
                 }
-                else break;
+                else 
+                {
+                    Overheating= true;
+                    break;
+                }
+                
             }
             _overheatingTime = time;
         }

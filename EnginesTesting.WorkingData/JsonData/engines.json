@@ -1,0 +1,9 @@
+﻿[
+  {
+    "SuperheatTemp": 110.0,
+    "InertiaMoment": 10.0,
+    "CoefHeatingSpeedOnTorque": 0.01,
+    "CoefHeatingSpeedOnCrankshaft": 0.0001,
+    "CoefCoolingSpeedOnTempEngineAndEnvironment": 0.1
+  }
+]

@@ -1,0 +1,28 @@
+﻿[
+  [
+    {
+      "Torque": 20.0,
+      "SpeedCrankshaft": 0.0
+    },
+    {
+      "Torque": 75.0,
+      "SpeedCrankshaft": 75.0
+    },
+    {
+      "Torque": 100.0,
+      "SpeedCrankshaft": 150.0
+    },
+    {
+      "Torque": 105.0,
+      "SpeedCrankshaft": 200.0
+    },
+    {
+      "Torque": 75.0,
+      "SpeedCrankshaft": 250.0
+    },
+    {
+      "Torque": 0.0,
+      "SpeedCrankshaft": 300.0
+    }
+  ]
+]

@@ -2,9 +2,9 @@
 
 namespace ModelEngine
 {
-    public abstract class Engine
+    public class Engine
     {
-        protected Engine(double superheatTemp, double inertiaMoment, double coefHeatingSpeedOnTorque, double coefHeatingSpeedOnCrankshaft, double coefCoolingSpeedOnTempEngineAndEnvironment)
+        public Engine(double superheatTemp, double inertiaMoment, double coefHeatingSpeedOnTorque, double coefHeatingSpeedOnCrankshaft, double coefCoolingSpeedOnTempEngineAndEnvironment)
         {
             SuperheatTemp = superheatTemp;
             CoefHeatingSpeedOnTorque = coefHeatingSpeedOnTorque;

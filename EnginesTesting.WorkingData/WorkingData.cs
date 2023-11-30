@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
@@ -9,64 +10,75 @@ using ModelEngine;
 
 namespace WorkingData
 {
-    public class WorkingData
+    public class Data
     {
-        public WorkingData(string[] args)
+        public Data(string[] nameFiles)
         {
             CurrentDirectory = $"{Environment.CurrentDirectory}";
-            if (DataIsCorrect(args))
-            {
-                Args = args;
-            }
+            NameFiles = nameFiles;
         }
-        private string[] Args;
+        private string[] NameFiles;
         private string CurrentDirectory { get; set; }
-        private string CinemasJsonPath { get { return CurrentDirectory + "\\Data\\" + Args[0]; } }
-        private string BasketJsonPath { get { return CurrentDirectory + "\\Data\\" + Args[1]; } }
+        private string EnginesJsonPath { get { return CurrentDirectory + "\\JsonData\\" + NameFiles[0]; } }
+        private string LineDependJsonPath { get { return CurrentDirectory + "\\JsonData\\" + NameFiles[1]; } }
+        private string DataTestJsonPath { get { return CurrentDirectory + "\\JsonData\\" + NameFiles[1]; } }
 
-        public static bool DataIsCorrect(string[] args)
+        public static bool IsCorrect(string[] args)
         {
-            if (args.Length == 2)
+            if (args.Length == 3)
             {
                 return args.All(x => x.Contains(".json"));
             }
             return false;
         }
-        /*public CinemaChain CinemasDeserializ()
+        public List<Engine> GetEngines()
         {
             try
             {
-                string textJson = File.ReadAllText(CinemasJsonPath);
+                string textJson = File.ReadAllText(EnginesJsonPath);
 
-                CinemaChain element = JsonSerializer.Deserialize<CinemaChain>(textJson)!;
+                List<Engine> element = JsonSerializer.Deserialize<List<Engine>>(textJson)!;
                 return element;
             }
             catch (FileNotFoundException)
             {
-                throw new DataException("Не найден файл", CinemasJsonPath);
+                throw new Exception("Не найден файл");
             }
             catch (JsonException)
             {
-                throw new DataException("Ошибка в файле", CinemasJsonPath);
+                throw new Exception("Ошибка в файле");
             }
             catch
             {
-                throw new DataException("Ошибка", CinemasJsonPath);
+                throw new Exception("Ошибка");
             }
         }
-        private string ChoicePath<T>(T element)
+        
+        
+        public List<List<DependTorqueOnSpeedCrankshaft>> GetDataExperimant()
         {
-            if (element is CinemaChain)
-                return CinemasJsonPath;
-            else if (element is Basket)
-                return BasketJsonPath;
-            else
-                throw new DataException("Ошибка в типе сохраняемого элемента");
-        }
-        public void Save<T>(T element)
-        {
-            string path = ChoicePath(element);
+            try
+            {
+                string textJson = File.ReadAllText(LineDependJsonPath);
 
+                List<List<DependTorqueOnSpeedCrankshaft>> element = JsonSerializer.Deserialize<List<List<DependTorqueOnSpeedCrankshaft>>>(textJson)!;
+                return element;
+            }
+            catch (FileNotFoundException)
+            {
+                throw new Exception("Не найден файл");
+            }
+            catch (JsonException)
+            {
+                throw new Exception("Ошибка в файле");
+            }
+            catch
+            {
+                throw new Exception("Ошибка");
+            }
+        }
+        public void SaveResultTest(List<EngineTest> element)
+        {
             var options = new JsonSerializerOptions
             {
                 Encoder = JavaScriptEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.Cyrillic),
@@ -74,7 +86,7 @@ namespace WorkingData
                 IncludeFields = true
             };
             string jsonString = JsonSerializer.Serialize(element, options);
-            File.WriteAllText(path, jsonString);
-        }*/
+            File.WriteAllText(DataTestJsonPath, jsonString);
+        }
     }
 }

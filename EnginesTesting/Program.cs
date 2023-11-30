@@ -1,6 +1,8 @@
-﻿using System;
+﻿using ModelEngine;
+using System;
 using System.Collections.Generic;
 using WorkingData;
+using View;
 
 namespace Flow
 {
@@ -8,17 +10,21 @@ namespace Flow
     {
         static void Main(string[] args)
         {
-            MainFlow.StartProgram();
-            /*
-             
-             Проблемы:
-            
-            * Дискретность тестирования с еденицей времени в одну секунду
-            
-            */
+            if (Data.IsCorrect(args))
+            {
+                Data data = new(args);
+                List<Engine> engines = data.GetEngines();
+                List<List<DependTorqueOnSpeedCrankshaft>> dataExperimant = data.GetDataExperimant();
 
-            
+                List<EngineTest> tests = MainFlow.StartProgram(engines,dataExperimant);
+                data.SaveResultTest(tests);
 
+                ConsoleView.MessageCompletionProgram();
+            }
+            else
+            {
+                ConsoleView.MessageIncorrectInput();
+            }
         }
     }
 }
