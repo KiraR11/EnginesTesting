@@ -32,11 +32,10 @@ namespace ModelEngine
             double time = 0.0; 
             for (int i = 0; i < Experiment.LinearDependence.Count; i++)
             {
-                time++;
                 if (Engine.Temp <= Engine.SuperheatTemp)
                 {
-                    Engine.TorqueAndSpeedCrankshaft.Torque = Experiment.LinearDependence[i].Torque;
-                    Engine.TorqueAndSpeedCrankshaft.SpeedCrankshaft = Experiment.LinearDependence[i].SpeedCrankshaft;
+                    Engine.TorqueAndSpeedCrankshaft = Experiment.LinearDependence[i];
+                    time++;
                 }
                 else 
                 {

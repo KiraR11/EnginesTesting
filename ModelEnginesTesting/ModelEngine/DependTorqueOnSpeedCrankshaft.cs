@@ -6,8 +6,8 @@ namespace ModelEngine
     {
         public DependTorqueOnSpeedCrankshaft(double torque, double speedCrankshaft)
         {
-            Torque = torque;
-            SpeedCrankshaft = speedCrankshaft;
+            _torque = torque;
+            _speedCrankshaft = speedCrankshaft;
         }
         private double? _torque;
         public double Torque
@@ -17,15 +17,6 @@ namespace ModelEngine
                 if (_torque != null && _torque >= 0.0) return (double)_torque;
                 else throw new Exception();
             }
-            set
-            {
-                if (value >= 0.0)
-                {
-                    _torque = value;
-                }
-
-                else throw new Exception();
-            }
         }
         private double? _speedCrankshaft;
         public double SpeedCrankshaft
@@ -33,15 +24,6 @@ namespace ModelEngine
             get
             {
                 if (_speedCrankshaft != null && _speedCrankshaft >= 0.0) return (double)_speedCrankshaft;
-                else throw new Exception();
-            }
-            set
-            {
-                if (value >= 0.0)
-                {
-                    _speedCrankshaft = value;
-                }
-
                 else throw new Exception();
             }
         }

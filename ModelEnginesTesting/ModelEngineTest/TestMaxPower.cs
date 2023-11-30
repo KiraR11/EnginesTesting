@@ -43,8 +43,7 @@ namespace ModelEngine
             double speedCrankshaft = 0.0;
             for (int i = 0; i < Experiment.LinearDependence.Count; i++)
             {
-                Engine.TorqueAndSpeedCrankshaft.Torque = Experiment.LinearDependence[i].Torque;
-                Engine.TorqueAndSpeedCrankshaft.SpeedCrankshaft = Experiment.LinearDependence[i].SpeedCrankshaft;
+                Engine.TorqueAndSpeedCrankshaft = Experiment.LinearDependence[i];
                 if (Engine.Power > maxPower)
                 {
                     maxPower = Engine.Power;

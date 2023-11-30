@@ -27,7 +27,7 @@ namespace Flow
                 EngineTest test = ChoiseTest(engine, experiment, NameTests);
                 tests.Add(test);
                 ConsoleView.OutputResultTest(test);
-            } while (ConsoleView.PoolYesOrNo("Продолжить тестирование?"));
+            } while (ConsoleView.PoolYesOrNo("Продолжить тестирование"));
 
             return tests;
         }
@@ -64,7 +64,7 @@ namespace Flow
                     test = new TestMaxPower(engine, experiment);
                 if (NameTest == "Тест время до переграва")
                     test = new TestOverheatingTime(engine, experiment);
-            } while (!ConsoleView.PoolYesOrNo("Оставить выбранный тест?"));
+            } while (!ConsoleView.PoolYesOrNo("Оставить выбранный тест"));
             return test;
         }
         private static List<Experiment> GetExperiments(List<List<DependTorqueOnSpeedCrankshaft>> dataExperiment,double temp)

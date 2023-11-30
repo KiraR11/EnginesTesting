@@ -20,37 +20,39 @@ namespace View
             string inputTemp;
             bool resultCheckPosiblParse;
 
-            ConsoleView.MessageInputTempEnvironment();
+            MessageInputTempEnvironment();
             do
             {
                 inputTemp = Console.ReadLine();
                 resultCheckPosiblParse = Double.TryParse(inputTemp, out temp);
-                if (resultCheckPosiblParse == false)
+                if (!resultCheckPosiblParse || temp < -273)
                 {
-                    ConsoleView.MessageIncorrectInput();
+                   MessageIncorrectInput();
                 }
 
             }
-            while (!resultCheckPosiblParse);
+            while (!resultCheckPosiblParse || temp < -273);
             return temp;
         }
         private static void OutputResultTestMaxPower(TestMaxPower test)
         {
-            Console.WriteLine("Результаты теста на максимальную мощность двигателя:\n");
+            Console.WriteLine("\nРезультаты теста на максимальную мощность двигателя:\n");
+            Console.WriteLine("\n---------------------------\n");
             Console.WriteLine("Максимальная мощность двигателя равна: {0}\n", test.MaxPower);
             Console.WriteLine("Скорость вращения коленвала равна: {0}\n", test.SpeedCrankshaft);
-            Console.WriteLine("\n");
+            Console.WriteLine("\n---------------------------\n");
+            
         }
         private static void OutputResultTestOverheatingTime(TestOverheatingTime test)
         {
-            Console.WriteLine("Результаты теста на время до перегрева:\n");
-            
-            Console.WriteLine("Время работы двигателя в секундах равно: {0}", test.OverheatingTime);
+            Console.WriteLine("\nРезультаты теста на время до перегрева:\n");
+            Console.WriteLine("\n---------------------------\n");
+            Console.WriteLine("Время работы двигателя в секундах равно: {0}\n", test.OverheatingTime);
             if (test.Overheating)
                 Console.WriteLine("За время работы двигатель перегрелся");
             else
                 Console.WriteLine("За время работы двигатель не перегрелся");
-            Console.WriteLine("\n");
+            Console.WriteLine("\n---------------------------\n");
         }
         public static void OutputResultTest(EngineTest test)
         {
@@ -143,7 +145,7 @@ namespace View
         }
         public static void MessageCompletionProgram()
         {
-            Console.WriteLine("\n Тестирование окончино");
+            Console.WriteLine("\nТестирование окончино");
             Console.ReadKey();
         }
         public static void OutpuTestName(List<string> nameTests)
