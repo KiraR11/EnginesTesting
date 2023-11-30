@@ -7,7 +7,7 @@ namespace Flow
 
     internal class MainFlow
     {
-        public static List<EngineTest> StartProgram(List<Engine> engines,List<List<DependTorqueOnSpeedCrankshaft>> dependsTorqueOnSpeeds) 
+        public static void StartProgram(List<Engine> engines,List<List<DependTorqueOnSpeedCrankshaft>> dependsTorqueOnSpeeds) 
         {
             double temp = ConsoleView.InputTempEnvironment();
             List<EngineTest> tests = new();
@@ -22,8 +22,6 @@ namespace Flow
                 tests.Add(test);
                 ConsoleView.OutputResultTest(test);
             } while (ConsoleView.PoolYesOrNo("Продолжить тестирование"));
-
-            return tests;
         }
         private static Engine ChoiseEngine(List<Engine> engines)
         {

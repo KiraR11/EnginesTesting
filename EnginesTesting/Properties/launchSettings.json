@@ -2,7 +2,7 @@
   "profiles": {
     "EnginesTest": {
       "commandName": "Project",
-      "commandLineArgs": "engines.json dependsExp.json resultTesting.json"
+      "commandLineArgs": "engines.json dependsExp.json"
     }
   }
 }

@@ -21,11 +21,10 @@ namespace WorkingData
         private string CurrentDirectory { get; set; }
         private string EnginesJsonPath { get { return CurrentDirectory + "\\JsonData\\" + NameFiles[0]; } }
         private string LineDependJsonPath { get { return CurrentDirectory + "\\JsonData\\" + NameFiles[1]; } }
-        private string DataTestJsonPath { get { return CurrentDirectory + "\\JsonData\\" + NameFiles[1]; } }
 
         public static bool IsCorrect(string[] args)
         {
-            if (args.Length == 3)
+            if (args.Length == 2)
             {
                 return args.All(x => x.Contains(".json"));
             }
@@ -76,17 +75,6 @@ namespace WorkingData
             {
                 throw new Exception("Ошибка");
             }
-        }
-        public void SaveResultTest(List<EngineTest> element)
-        {
-            var options = new JsonSerializerOptions
-            {
-                Encoder = JavaScriptEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.Cyrillic),
-                WriteIndented = true,
-                IncludeFields = true
-            };
-            string jsonString = JsonSerializer.Serialize(element, options);
-            File.WriteAllText(DataTestJsonPath, jsonString);
         }
     }
 }

@@ -15,10 +15,7 @@ namespace Flow
                 Data data = new(args);
                 List<Engine> engines = data.GetEngines();
                 List<List<DependTorqueOnSpeedCrankshaft>> dataExperimant = data.GetDataExperimant();
-
-                List<EngineTest> tests = MainFlow.StartProgram(engines,dataExperimant);
-                data.SaveResultTest(tests);
-
+                MainFlow.StartProgram(engines,dataExperimant);
                 ConsoleView.MessageCompletionProgram();
             }
             else
